@@ -9,8 +9,12 @@ resource "openstack_compute_instance_v2" "master" {
   user_data       = file("./user-data.yaml")
 
   network {
+    name = "public"
+  }
+  network {
     name = "hpc-private"
   }
+
 }
 
 # Compute node
@@ -30,7 +34,7 @@ resource "openstack_compute_instance_v2" "compute" {
 }
 
 # Generate floating ip
-
+/*
 resource "openstack_networking_floatingip_v2" "floating_ip_master" {
   pool = "public"
 }
@@ -39,7 +43,7 @@ resource "openstack_compute_floatingip_associate_v2" "floatingipmaster_associate
   floating_ip = openstack_networking_floatingip_v2.floating_ip_master.address
   instance_id = openstack_compute_instance_v2.master.id
 }
-
+*/
 
 
 # Generate inventory file for Ansible
