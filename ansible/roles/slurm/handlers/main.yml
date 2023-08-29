@@ -1,0 +1,11 @@
+---
+# handlers file for slurm
+- name: "Restart Slurm service."
+  service:
+    name: '{{item}}'
+    state: started
+    enabled: yes
+  loop:
+    - munge
+    - slurmd
+    - slurmctld

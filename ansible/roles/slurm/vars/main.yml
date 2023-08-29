@@ -1,0 +1,5 @@
+---
+# vars file for slurm
+SLURM_MASTER_HOST: "{{groups['master'][0]}}"
+SLURM_MASTER_ADDR: "{{hostvars[SLURM_MASTER_HOST].ansible_default_ipv4.address}}"
+SLURM_MASTER_FQDN: "{{hostvars[SLURM_MASTER_HOST].ansible_hostname}}"

@@ -2,17 +2,14 @@
 
 resource "openstack_compute_instance_v2" "master" {
   name            = "master"
-  image_name      = "AlmaLinux-9"
+  image_name      = "CentOS_SLURM"
   flavor_name     = "m1.mini"
-  key_pair        = "hpcSSH"
+  key_pair        = "testSSH"
   security_groups = ["min-sg"]
   user_data       = file("./user-data.yaml")
 
   network {
     name = "hpc-private"
-  }
-  network {
-    name = "public"
   }
 
 }
@@ -21,9 +18,9 @@ resource "openstack_compute_instance_v2" "master" {
 
 resource "openstack_compute_instance_v2" "compute" {
   name            = "cn0${count.index}"
-  image_name      = "AlmaLinux-9"
+  image_name      = "CentOS_SLURM"
   flavor_name     = "m1.mini"
-  key_pair        = "hpcSSH"
+  key_pair        = "testSSH"
   security_groups = ["min-sg"]
   user_data       = file("./user-data.yaml")
   count           = var.instance_count
@@ -55,6 +52,6 @@ resource "local_file" "hosts_cfg" {
       compute = openstack_compute_instance_v2.compute.*.access_ip_v4
     }
   )
-  filename        = "./hosts.cfg"
+  filename        = "../files/hosts"
   file_permission = 644
 }

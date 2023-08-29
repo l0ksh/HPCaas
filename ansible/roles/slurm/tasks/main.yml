@@ -1,0 +1,21 @@
+---
+- name: "Set slurm.conf file from Ansible hostgroups."
+  template:
+    dest: /etc/slurm/slurm.conf
+    src: slurm.conf.j2
+- name: "Change directory permisssions."
+  file:
+    dest: /var/share/slurm/
+    owner: slurm
+    group: slurm
+    mode: 0755
+    recurse: yes
+- name: "Restart Slurm service."
+  service:
+    name: '{{item}}'
+    state: started
+    enabled: yes
+  loop:
+    - munge
+    - slurmd
+    - slurmctld

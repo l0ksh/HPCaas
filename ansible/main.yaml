@@ -1,0 +1,7 @@
+---
+- import_playbook: hosts.yaml
+- name: Slurm Configuration
+  hosts: all
+  become: yes
+  roles:
+    - slurm
