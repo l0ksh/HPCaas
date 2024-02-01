@@ -2,14 +2,14 @@
 
 resource "openstack_compute_instance_v2" "master" {
   name            = "master"
-  image_name      = "CentOS_SLURM"
-  flavor_name     = "m1.mini"
-  key_pair        = "testSSH"
-  security_groups = ["min-sg"]
+  image_name      = var.image
+  flavor_name     = var.flavor
+  key_pair        = var.keypair
+  security_groups = [var.security_groups]
   user_data       = file("./user-data.yaml")
 
   network {
-    name = "hpc-private"
+    name = var.private
   }
 
 }
@@ -18,15 +18,15 @@ resource "openstack_compute_instance_v2" "master" {
 
 resource "openstack_compute_instance_v2" "compute" {
   name            = "cn0${count.index}"
-  image_name      = "CentOS_SLURM"
-  flavor_name     = "m1.mini"
-  key_pair        = "testSSH"
-  security_groups = ["min-sg"]
+  image_name      = var.image
+  flavor_name     = var.flavor
+  key_pair        = var.keypair
+  security_groups = [var.security_groups]
   user_data       = file("./user-data.yaml")
   count           = var.instance_count
 
   network {
-    name = "hpc-private"
+    name = var.private
   }
 }
 
