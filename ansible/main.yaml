@@ -1,7 +1,7 @@
----
-- import_playbook: hosts.yaml
-- name: Slurm Configuration
+- name: Creating Slurm cluster ...
   hosts: all
-  become: yes
+  become: 'yes'
+  gather_facts: yes
   roles:
+    - initial-setup
     - slurm

@@ -1,0 +1,21 @@
+- name: Mounting NFS on the cluster
+  hosts: all
+  become: true
+  become_user: root
+  vars:
+    share: "/share"
+    permission: '0777'
+  tasks:
+  - file:
+      path: "{{ share }}"
+      state: directory
+      mode: "{{ permission }}"
+      owner: root
+      group: root
+
+  - mount:
+      src: '172.10.1.24:{{ share }}'
+      path: "{{ share }}"
+      opts: rw,sync,hard
+      state: mounted
+      fstype: nfs

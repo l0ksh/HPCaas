@@ -1,0 +1,5 @@
+---
+- name: "Set /etc/hosts file from Ansible hostgroups."
+  template:
+    dest: /etc/hosts
+    src: hosts.j2
