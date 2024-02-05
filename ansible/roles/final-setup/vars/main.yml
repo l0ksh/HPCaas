@@ -1,0 +1,5 @@
+---
+# vars file for final-setup
+share: "/share"
+permission: '0777'
+storageip: '172.10.1.24' 

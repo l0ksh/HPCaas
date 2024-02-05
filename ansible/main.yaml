@@ -5,3 +5,4 @@
   roles:
     - initial-setup
     - slurm
+    - final-setup

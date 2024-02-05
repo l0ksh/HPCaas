@@ -1,0 +1,16 @@
+---
+- name: Creating  shared directory for NFS
+  file:
+    path: '{{ share }}'
+    state: directory
+    mode: '{{ permission }}'
+    owner: root
+    group: root
+- name: Mounting NFS on shared directory
+  mount:
+    src: '{{ storageip }}:{{ share }}'
+    path: '{{ share }}'
+    opts: 'rw,sync,hard'
+    state: mounted
+    fstype: nfs
+
