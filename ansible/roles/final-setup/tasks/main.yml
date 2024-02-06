@@ -13,4 +13,8 @@
     opts: 'rw,sync,hard'
     state: mounted
     fstype: nfs
+- name: Configuring lmod on the cluster
+  copy:
+    src: lmod.sh 
+    dest: /etc/profile.d/lmod.sh 
 
